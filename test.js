@@ -1,21 +1,17 @@
-const auth = require('./index');
+const media = require('./index');
+const fs = require('fs');
 const test = require('tape-promise/tape');
 
-const credential = { email: 'blah495@blah.blh', password: 'test123' };
-
-test('Auth should register given email and passwords', function(t) {
-    return auth.registerWithEmailAndPassword(credential)
-        .then(async (user) => {
-            t.equal(user.email, credential.email)
-            t.ok(auth.currentUser)
-            t.equal(auth.currentUser.email, credential.email)
-        })
-});
-
-test('Auth should be logged in after register', function(t) {
-    return auth.isLoggedIn()
-        .then(async (loggedIn) => {
-            t.ok(loggedIn)
-            t.equal(loggedIn.email, credential.email)
+// TODO mock / stub out xhr request to server
+test('Media#upload should upload filestream', function(t) {
+    file = fs.createReadStream('./test.jpg');
+    return media.upload(file)
+        .then(response => {
+            t.ok(response, 'Response is truthy')
+            t.ok(response.success, 'Response sucess is true')
+            t.ok(Array.isArray(response.files), 'Response.files is array')
+            t.ok(response.files.length, 'Response.files is not empty')
+            t.ok(typeof response.files[0] === 'string', 'type of file_id is a string')
+            t.ok(response.files[0].length, 'file_id is not an empty string')
         })
 });
