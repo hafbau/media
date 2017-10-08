@@ -1,7 +1,7 @@
 {
-  "name": "auth",
+  "name": "media",
   "version": "1.0.0",
-  "description": "",
+  "description": "Client for the media service",
   "main": "index.js",
   "scripts": {
     "test": "tape test.js"
