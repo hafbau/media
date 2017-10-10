@@ -17,11 +17,12 @@ const request = require('request-promise-native');
      }
 
     upload(fileStream, fieldName = 'file') {
-        // if (
-        //     typeof fileStream.read !== 'function' ||
-        //     typeof fileStream.on !== 'function' ||
-        //     !(fileStream instanceof Buffer)
-        // ) throw new Error(`${fileStream} must be a Readable Stream or a Buffer`)
+        if (
+            typeof fileStream.read !== 'function' ||
+            typeof fileStream.on !== 'function'
+        ) throw new Error(`${fileStream} must be a Readable Stream`);
+
+        console.log('uploading...')
         
         return request({
             method: 'POST',
