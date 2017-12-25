@@ -16,19 +16,23 @@ const request = require('request-promise-native');
          this.apiUrl = apiUrl;
      }
 
-    upload(fileStream, fieldName = 'file') {
-        if (
-            typeof fileStream.read !== 'function' ||
-            typeof fileStream.on !== 'function'
-        ) throw new Error(`${fileStream} must be a Readable Stream`);
-
-        console.log('uploading...')
-        
-        return request({
-            method: 'POST',
-            uri: `${this.apiUrl}/files`,
-            formData: { [fieldName]: fileStream },
-            json: true
+     upload(fileStream, fieldName = 'file') {
+         return Promise.resolve().then(_ => {
+             console.log('instance of file', fileStream instanceof File)
+             console.log('type of file', typeof fileStream)
+            // fileStream is of node ReadStream
+            // if (
+            //     typeof fileStream.read !== 'function' ||
+            //     typeof fileStream.on !== 'function'
+            // ) {
+            
+                return request({
+                    method: 'POST',
+                    uri: `${this.apiUrl}/files`,
+                    formData: { [fieldName]: fileStream },
+                    json: true
+                })
+            // }
         })
         .then(fileDetail => {
             return fileDetail;
