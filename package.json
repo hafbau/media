@@ -1,10 +1,6 @@
 {
   "name": "media",
-<<<<<<< HEAD
-  "version": "1.1.1",
-=======
   "version": "1.1.0",
->>>>>>> 0f83b62b363db65f9f04bc0b9ae6bb8c6f9fc4cc
   "change": "Can now upload type File",
   "description": "Client for the media service",
   "main": "index.js",
