@@ -26,6 +26,9 @@ class Media {
                 
                 return superagent.post(`${this.apiUrl}/files`)
                 .send(formData)
+                .then(res => {
+                    return res.body;
+                })
             }
             // fileStream is of node ReadStream
             if (
