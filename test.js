@@ -8,10 +8,7 @@ test('Media#upload should upload filestream', function(t) {
     return media.upload(file)
         .then(response => {
             t.ok(response, 'Response is truthy')
-            t.ok(response.success, 'Response sucess is true')
-            t.ok(Array.isArray(response.files), 'Response.files is array')
-            t.ok(response.files.length, 'Response.files is not empty')
-            t.ok(typeof response.files[0] === 'string', 'type of file_id is a string')
-            t.ok(response.files[0].length, 'file_id is not an empty string')
+            t.ok(typeof response === 'string', 'type of file_id is a string')
+            t.ok(response.length, 'file_id is not an empty string')
         })
 });
